@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.auth-main-bg {
+  color: white;
+}
+.login-main-bg {
+  color: black;
+}
+
+.email-input {
+  height: 50px;
+  padding: 0 16px;
+  width: 20rem;
+  box-sizing: border-box;
+  outline: none;
+  border: 1px solid #c2c8d0;
+  border-radius: 3px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.email-label {
+  position: absolute;
+  font-size: 16px;
+  top: 13px;
+  left: 15px;
+  color: #828282;
+  padding: 0 5px;
+  transition: 0.2s;
+  pointer-events: none;
+}
+
+.email-input:focus,
+.email-input:valid {
+  border: 1px solid #10a37f;
+}
+
+.email-input:not(:focus):valid {
+  border: 1px solid #c2c8d0;
+}
+
+.email-input:not(:focus):valid + .email-label {
+  color: #828282;
+}
+
+.email-input:focus + .email-label,
+.email-input:valid + .email-label {
+  top: -12px;
+  left: 8px;
+  color: #10a37f;
+  font-size: 14px;
+  background-color: white;
+}
