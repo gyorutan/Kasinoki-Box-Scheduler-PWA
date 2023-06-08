@@ -1,7 +1,38 @@
-import { Link } from "react-router-dom";
+const API = import.meta.env.VITE_API_URL;
+
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header";
+import { useEffect, useState } from "react";
 
 const Signup = () => {
+  const { param } = useParams();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+
+  const handleContinue = async (e) => {
+    e.preventDefault();
+
+    console.log(email);
+    const response = await fetch(`${API}/verify/email`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    const data = await response.json();
+    console.log(data);
+    console.log(data.success);
+
+    if (data.success) {
+      navigate(`/signup/password/${email}`);
+    }
+  };
+
+  useEffect(() => {
+    if (param) {
+      setEmail(param);
+    }
+  }, [param]);
+
   return (
     <>
       <div className="login-main-bg bg-white">
@@ -12,9 +43,17 @@ const Signup = () => {
               Create your account
             </div>
             <div>
-              <form className="flex flex-col gap-6">
+              <form className="flex flex-col gap-6" onSubmit={handleContinue}>
                 <div className="relative">
-                  <input className="email-input" type="text" required />
+                  <input
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    className="email-input"
+                    type="text"
+                    required
+                  />
                   <label className="email-label">Email address</label>
                 </div>
                 <div>

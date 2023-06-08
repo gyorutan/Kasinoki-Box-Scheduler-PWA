@@ -13,9 +13,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/login/:param" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login/password" element={<Password />} />
-        <Route path="/signup/password" element={<Password />} />
+        <Route path="/signup/:param" element={<Signup />} />
+        <Route path="/login/password/:email" element={<Password />} />
+        <Route path="/signup/password/:email" element={<Password />} />
       </Routes>
     </Router>
   );
