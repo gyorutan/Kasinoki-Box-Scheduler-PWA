@@ -3,7 +3,7 @@ const Header = () => {
     <>
       <div className="fixed w-full flex justify-center py-7">
         <div className="font-bold text-center text-2xl">
-          Open AI
+          ChatPod
         </div>
       </div>
     </>
