@@ -16,7 +16,7 @@ const Footer = () => {
 
   return (
     <>
-      <div className="bg-[#8696FE] border-t-[1px] items-center fixed flex bottom-0 h-[52px] w-full text-white">
+      <div className="bg-[#8696FE] items-center fixed flex bottom-0 h-[52px] w-full text-white z-50">
         <div className="w-full h-[52px] items-center flex justify-center">
           <Link
             to={"/schedule"}

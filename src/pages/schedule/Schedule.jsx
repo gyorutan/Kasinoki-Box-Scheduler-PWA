@@ -107,7 +107,7 @@ const Schedule = () => {
             </div>
           ))}
         </div>
-        <div className="pt-24" ref={bottomRef} />
+        <div className="pt-14" ref={bottomRef} />
       </div>
     </>
   );

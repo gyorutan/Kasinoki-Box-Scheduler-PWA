@@ -23,7 +23,7 @@ const Navbar = ({ children }) => {
 
   return (
     <>
-      <div className="flex fixed top-0 left-0 w-full h-[50px] bg-[#8696FE] text-white justify-center items-center">
+      <div className="flex fixed top-0 left-0 w-full h-[50px] bg-[#8696FE] text-white justify-center items-center z-50">
         <div className="items-center font-semibold text-xl flex justify-center">
           {location.pathname.includes("user") ? `${currentUser}のプロフィール` : PageTitle}
         </div>
