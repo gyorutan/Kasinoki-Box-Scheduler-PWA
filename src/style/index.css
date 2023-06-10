@@ -1,11 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-  font-family: "Poppins", sans-serif;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
 html,
@@ -47,7 +46,7 @@ body {
   position: absolute;
   font-size: 16px;
   top: 13px;
-  left: 15px;
+  left: 13px;
   color: #828282;
   padding: 0 5px;
   transition: 0.2s;
@@ -96,9 +95,9 @@ body {
   position: absolute;
   margin: auto;
   height: 1px;
-  background: #bababa;
-  width: 42%;
-  top: 47%;
+  background: #7988ec;
+  width:38%;
+  top: 50%;
 }
 
 .lines::after {
@@ -107,4 +106,13 @@ body {
 
 .lines::before {
   right: 0;
+}
+
+.wrap {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.text {
+  color: rgb(255, 64, 64);
+  opacity: 80%;
 }

@@ -1,43 +1,58 @@
 const API = import.meta.env.VITE_API_URL;
 
-import { Link, useNavigate, useParams } from "react-router-dom";
-import Header from "../../components/Header";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AiOutlineEye } from "react-icons/ai";
+import { toast } from "react-hot-toast";
+import { createdAt } from "../../functions/timeStamp.js";
 
-const Signup = () => {
-  const { param } = useParams();
+const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [loginId, setLoginId] = useState("");
+  const [loginPw, setLoginPw] = useState("");
+
+  const inputReset = () => {
+    setLoginId("");
+    setLoginPw("");
+  };
 
   const handleContinue = async (e) => {
     e.preventDefault();
-
-    console.log(email);
-    const response = await fetch(`${API}/verify/email`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-    const data = await response.json();
-    console.log(data);
-    console.log(data.success);
-
-    if (data.success) {
-      navigate(`/signup/password/${email}`);
+    try {
+      const formData = { username, loginId, loginPw, createdAt };
+      const response = await fetch(`${API}/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const result = await response.json();
+      if (result.success) {
+        toast.success("登録できますた!", {
+          duration: 2000,
+        });
+        inputReset();
+        navigate("/login");
+      } else {
+        toast.error("登録できませんでした!", {
+          duration: 2000,
+        });
+        inputReset();
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
-
-  useEffect(() => {
-    if (param) {
-      setEmail(param);
-    }
-  }, [param]);
 
   return (
     <>
       <div className="login-main-bg bg-white">
-        <Header />
         <div className="flex justify-center items-center h-screen">
+          <div className="fixed top-0 w-full flex justify-center py-4">
+            <div className="font-bold text-center text-3xl">
+              <Link to={"/"}>Box Scheduler</Link>
+            </div>
+          </div>
           <div className="grid-row flex flex-col gap-6 items-center">
             <div className="title text-3xl font-semibold mb-3 text-black text-opacity-80">
               Create your account
@@ -46,44 +61,60 @@ const Signup = () => {
               <form className="flex flex-col gap-6" onSubmit={handleContinue}>
                 <div className="relative">
                   <input
-                    value={email}
+                    value={username}
                     onChange={(e) => {
-                      setEmail(e.target.value);
+                      setUsername(e.target.value);
                     }}
                     className="email-input"
                     type="text"
                     required
                   />
-                  <label className="email-label">Email address</label>
+                  <label className="email-label">Username</label>
+                </div>
+                <div className="relative">
+                  <input
+                    value={loginId}
+                    onChange={(e) => {
+                      setLoginId(e.target.value);
+                    }}
+                    className="email-input"
+                    type="text"
+                    required
+                  />
+                  <label className="email-label">Login ID</label>
+                </div>
+                <div className="relative">
+                  <input
+                    value={loginPw}
+                    onChange={(e) => {
+                      setLoginPw(e.target.value);
+                    }}
+                    className="email-input"
+                    type="password"
+                    required
+                  />
+                  <label className="email-label">Password</label>
+                  <AiOutlineEye
+                    size={22}
+                    onClick={() => {}}
+                    className="absolute text-[#626262] left-[280px] top-[14px] cursor-pointer"
+                  />
                 </div>
                 <div>
                   <button
                     className="w-full bg-[#8696FE] text-white text-center py-3.5 rounded-[3px] hover:bg-[#7988ec] transition duration-300"
                     type="submit"
                   >
-                    Continue
+                    新規登録
                   </button>
                 </div>
               </form>
             </div>
             <div className="text-sm opacity-80">
-              Already have an account?
+              すでにアカウントを持ってますか？
               <Link to={"/login"} className="ml-1 text-[#8696FE]">
-                Log in
+                ログイン
               </Link>
-            </div>
-            <div className="lines">
-              <span className="text-sm flex justify-center opacity-60">OR</span>
-            </div>
-            <div className="flex flex-col gap-3 w-full">
-              <div className="cursor-pointer items-center border border-[#c2c8d0] p-3 rounded-[3px] flex hover:bg-gray-200 trasition duration-200">
-                <img src="../google.png" alt="" className="w-5 h-5 mx-1" />
-                <span className="px-3">Continue with Google</span>
-              </div>
-              <div className="cursor-pointer items-center border border-[#c2c8d0] p-3 rounded-[3px] flex hover:bg-gray-200 trasition duration-200">
-                <img src="../github.png" alt="" className="w-5 h-5 mx-1" />
-                <span className="px-3">Continue with GitHub</span>
-              </div>
             </div>
           </div>
         </div>
@@ -92,4 +123,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
